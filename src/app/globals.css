@@ -1,0 +1,56 @@
+@import "tailwindcss";
+@import "maplibre-gl/dist/maplibre-gl.css";
+
+:root {
+  --et-bg: #060b14;
+  --et-surface: #0d1524;
+  --et-surface-strong: #101a2d;
+  --et-border: #1d2a3f;
+  --et-text: #e5edf8;
+  --et-text-muted: #c0cce0;
+  --et-accent: #f97316;
+  --et-accent-soft: rgba(249, 115, 22, 0.14);
+  --et-ok: #10b981;
+}
+
+@theme inline {
+  --font-sans: var(--font-space-grotesk);
+  --font-mono: var(--font-plex-mono);
+  --color-bg: var(--et-bg);
+  --color-surface: var(--et-surface);
+  --color-surface-strong: var(--et-surface-strong);
+  --color-border: var(--et-border);
+  --color-text: var(--et-text);
+  --color-text-muted: var(--et-text-muted);
+  --color-accent: var(--et-accent);
+  --color-accent-soft: var(--et-accent-soft);
+  --color-ok: var(--et-ok);
+}
+
+* {
+  border-color: var(--et-border);
+}
+
+body {
+  background:
+    radial-gradient(circle at 8% 0%, rgba(249, 115, 22, 0.1), transparent 40%),
+    radial-gradient(circle at 92% 12%, rgba(56, 189, 248, 0.1), transparent 32%),
+    var(--et-bg);
+  color: var(--et-text);
+  font-family: var(--font-space-grotesk), sans-serif;
+}
+
+.skip-link {
+  transition: transform 120ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
+}

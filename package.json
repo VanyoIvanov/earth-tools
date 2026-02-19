@@ -1,0 +1,52 @@
+{
+  "name": "earth-tools",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "e2e:install": "playwright install --with-deps",
+    "e2e": "playwright test",
+    "a11y": "node scripts/a11y-smoke.mjs",
+    "lhci": "lhci autorun"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.575.0",
+    "maplibre-gl": "^5.18.0",
+    "next": "16.1.6",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "tailwind-merge": "^3.5.0",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@lhci/cli": "^0.15.1",
+    "@playwright/test": "^1.58.2",
+    "@tailwindcss/postcss": "^4",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/geojson": "^7946.0.16",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@vitest/coverage-v8": "^4.0.18",
+    "axe-core": "^4.11.1",
+    "eslint": "^9",
+    "eslint-config-next": "16.1.6",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "jsdom": "^28.1.0",
+    "playwright": "^1.58.2",
+    "tailwindcss": "^4",
+    "typescript": "^5",
+    "vitest": "^4.0.18"
+  },
+  "packageManager": "pnpm@10.30.0+sha512.2b5753de015d480eeb88f5b5b61e0051f05b4301808a82ec8b840c9d2adf7748eb352c83f5c1593ca703ff1017295bc3fdd3119abb9686efc96b9fcb18200937"
+}
