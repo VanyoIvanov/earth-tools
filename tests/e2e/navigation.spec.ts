@@ -12,12 +12,11 @@ test("navigates across primary routes", async ({ page }) => {
   await expect(page.getByRole("heading", { name: "System Status" })).toBeVisible();
 
   await page.getByRole("navigation", { name: "Primary" }).getByRole("link", { name: "Wildfire Tool" }).click();
-  await expect(page.getByRole("heading", { name: "Wildfire Nowcast" }).first()).toBeVisible();
-  await expect(page.getByTestId("map-legend")).toBeVisible();
-
-  const mapVisible = await page.getByTestId("wildfire-map").isVisible();
-  if (!mapVisible) {
-    await expect(page.getByText(/Map rendering/i)).toBeVisible();
+  if (await page.getByTestId("wildfire-iframe").count()) {
+    await expect(page.getByTestId("wildfire-iframe")).toBeVisible();
+  } else {
+    await expect(page.getByRole("heading", { name: "Wildfire Nowcast" })).toBeVisible();
+    await expect(page.getByText(/NEXT_PUBLIC_WILDFIRE_NOWCAST_URL/)).toBeVisible();
   }
 });
 

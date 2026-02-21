@@ -1,24 +1,33 @@
 import { render, screen } from "@testing-library/react";
-import type { ReactElement } from "react";
 import WildfirePage from "@/app/(site)/wildfire/page";
 
-vi.mock("next/dynamic", () => ({
-  default: (
-    _: unknown,
-    options?: {
-      loading?: () => ReactElement;
-    }
-  ) => {
-    const DynamicComponent = () => options?.loading?.() ?? <div data-testid="dynamic-map-placeholder" />;
-    return DynamicComponent;
-  }
-}));
-
 describe("wildfire page", () => {
-  it("renders sidebar content and map placeholder", async () => {
+  const originalNowcastUrl = process.env.NEXT_PUBLIC_WILDFIRE_NOWCAST_URL;
+
+  afterEach(() => {
+    if (originalNowcastUrl === undefined) {
+      delete process.env.NEXT_PUBLIC_WILDFIRE_NOWCAST_URL;
+      return;
+    }
+
+    process.env.NEXT_PUBLIC_WILDFIRE_NOWCAST_URL = originalNowcastUrl;
+  });
+
+  it("renders a setup message when iframe URL is not configured", async () => {
+    delete process.env.NEXT_PUBLIC_WILDFIRE_NOWCAST_URL;
     render(await WildfirePage());
 
-    expect(screen.getByText("Wildfire model details")).toBeInTheDocument();
-    expect(screen.getAllByText("How It Works").length).toBeGreaterThan(0);
+    expect(screen.getByRole("heading", { name: "Wildfire Nowcast" })).toBeInTheDocument();
+    expect(screen.getByText(/NEXT_PUBLIC_WILDFIRE_NOWCAST_URL/)).toBeInTheDocument();
+  });
+
+  it("renders wildfire iframe when external URL is configured", async () => {
+    process.env.NEXT_PUBLIC_WILDFIRE_NOWCAST_URL = "http://localhost:8501";
+
+    render(await WildfirePage());
+
+    const iframe = screen.getByTitle("Wildfire Nowcast app");
+    expect(iframe).toBeInTheDocument();
+    expect(iframe).toHaveAttribute("src", "http://localhost:8501/");
   });
 });

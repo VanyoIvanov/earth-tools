@@ -1,16 +1,6 @@
-import { siteRepository, statusRepository, wildfireRepository } from "@/lib/data/repositories";
+import { siteRepository, statusRepository } from "@/lib/data/repositories";
 
 describe("repositories", () => {
-  it("returns validated wildfire datasets", async () => {
-    const detections = await wildfireRepository.getActiveDetections();
-    const forecasts = await wildfireRepository.getForecastAreas();
-    const sidebar = await wildfireRepository.getSidebarMeta();
-
-    expect(detections.length).toBeGreaterThan(0);
-    expect(forecasts.length).toBeGreaterThan(0);
-    expect(sidebar.steps.length).toBeGreaterThan(0);
-  });
-
   it("returns validated status datasets", async () => {
     const systems = await statusRepository.getSystemSummary();
     const runs = await statusRepository.getLatestRuns();

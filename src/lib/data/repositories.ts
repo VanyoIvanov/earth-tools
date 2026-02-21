@@ -1,39 +1,17 @@
 import {
-  boundaryLinesSchema,
   overallStateSchema,
   pipelineRunsSchema,
   pipelineStatusSchema,
-  spreadForecastAreasSchema,
-  toolDirectorySchema,
-  wildfireDetectionsSchema,
-  wildfireSidebarMetaSchema
+  toolDirectorySchema
 } from "@/lib/domain/schemas";
 import type {
-  BoundaryLine,
   OverallState,
   PipelineRun,
   PipelineStatusItem,
-  SpreadForecastArea,
-  ToolDirectoryItem,
-  WildfireDetection,
-  WildfireSidebarMeta
+  ToolDirectoryItem
 } from "@/lib/domain/types";
 import { pipelineRunsData, systemSummaryData, overallStateData } from "@/lib/data/mock/status";
 import { toolDirectoryData } from "@/lib/data/mock/tools";
-import {
-  boundaryLinesData,
-  spreadForecastAreasData,
-  wildfireDetectionsData,
-  wildfireSidebarMetaData
-} from "@/lib/data/mock/wildfire";
-
-export interface WildfireRepository {
-  getActiveDetections(): Promise<WildfireDetection[]>;
-  getForecastAreas(): Promise<SpreadForecastArea[]>;
-  getBoundaryLines(): Promise<BoundaryLine[]>;
-  getSidebarMeta(): Promise<WildfireSidebarMeta>;
-  getUpdatedAt(): Promise<string>;
-}
 
 export interface StatusRepository {
   getSystemSummary(): Promise<PipelineStatusItem[]>;
@@ -45,26 +23,6 @@ export interface SiteRepository {
   getToolDirectory(): Promise<ToolDirectoryItem[]>;
   getFeaturedTool(): Promise<ToolDirectoryItem>;
 }
-
-const updatedAt = "2026-02-19T20:24:00.000Z";
-
-export const wildfireRepository: WildfireRepository = {
-  async getActiveDetections() {
-    return wildfireDetectionsSchema.parse(wildfireDetectionsData);
-  },
-  async getForecastAreas() {
-    return spreadForecastAreasSchema.parse(spreadForecastAreasData);
-  },
-  async getBoundaryLines() {
-    return boundaryLinesSchema.parse(boundaryLinesData);
-  },
-  async getSidebarMeta() {
-    return wildfireSidebarMetaSchema.parse(wildfireSidebarMetaData);
-  },
-  async getUpdatedAt() {
-    return updatedAt;
-  }
-};
 
 export const statusRepository: StatusRepository = {
   async getSystemSummary() {
